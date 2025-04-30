@@ -2,158 +2,174 @@
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>???? ?????? ????</title>
-    <style>
-        body {
-            font-family: 'Noto Nastaliq Urdu', serif;
-            background-color: #fdfdfd;
-            margin: 20px;
-            padding: 20px;
-            border: 3px solid #4CAF50;
-            border-radius: 15px;
-            background-image: url('https://i.ibb.co/7r2ccZ3/watermark.png'); /* ???? ???? */
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 300px;
-        }
-        h1, h2, h3 {
-            text-align: center;
-            color: #2E7D32;
-        }
-        .section {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #E8F5E9;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin: 8px 0 4px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
+  <meta charset="UTF-8">
+  <title>???? ?????? ????</title>
+  <link href="https://fonts.googleapis.com/earlyaccess/notonastaliqurdudraft.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Nastaliq Urdu Draft', serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+      direction: rtl;
+    }
+    .receipt {
+      background: #fff;
+      border: 2px solid #ccc;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      position: relative;
+    }
+    .receipt::after {
+      content: "???? ??????";
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-size: 60px;
+      color: rgba(200, 200, 200, 0.2);
+      z-index: 0;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .header img {
+      width: 100px;
+      height: auto;
 margin-bottom: 10px;
-            border: 1px solid #bbb;
-            border-radius: 5px;
-        }
-        .qr {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .print-btn, .pdf-btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 20px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 18px;
-            border: none;
-            border-radius: 7px;
-            cursor: pointer;
-            text-align: center;
-        }
-        .print-btn:hover, .pdf-btn:hover {
-            background-color: #45a049;
-        }
-        footer {
-            text-align: center;
-            font-size: 14px;
-            margin-top: 30px;
-            color: #666;
-        }
-    </style>
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .header p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+    .section {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      position: relative;
+      z-index: 1;
+    }
+    .section:nth-child(odd) {
+      background-color: #e0f7fa;
+    }
+    .section:nth-child(even) {
+      background-color: #f1f8e9;
+    }
+    .section label {
+      display: inline-block;
+      width: 150px;
+      font-weight: bold;
+    }
+    .section span {
+      display: inline-block;
+      min-width: 200px;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .footer p {
+      margin: 5px 0;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .buttons button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .qr-code {
+      text-align: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .qr-code img {
+      width: 150px;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
-
-    <img src="https://i.ibb.co/XxFvNqN/muneeb-academy-logo.png" alt="Muneeb Academy Logo" style="display: block; margin: auto; width: 150px;">
-    <h1>???? ??????</h1>
-    <h3>???? ????? ??? ???? ????? ??? ???? ????</h3>
-    <h3 id="date"></h3>
-
-    <div class="section" style="background-color: #FCE4EC;">
-        <label>???? ????:</label> <span id="receiptNumber"></span>
-
-        <label>?? ?????:</label>
-        <select>
-            <option>?????</option>
-            <option>?????</option>
-<option>????</option>
-            <option>?????</option>
-            <option>???</option>
-            <option>???</option>
-            <option>??????</option>
-            <option>????</option>
-            <option>?????</option>
-            <option>??????</option>
-            <option>?????</option>
-            <option>?????</option>
-        </select>
+  <div class="receipt">
+    <div class="header">
+<img src="logo.png" alt="???? ?????? ????">
+      <h1>???? ??????</h1>
+      <p>”???? ?????“ ??? ???? ???? ? ??? ???? ????</p>
+      <p>?????: <span id="currentDate"></span></p>
+      <p>???? ????: <span id="receiptNumber"></span></p>
     </div>
 
-    <div class="section" style="background-color: #E1F5FE;">
-        <label>?? ???? ??? ?? ???:</label>
-        <input type="text" placeholder="???? ??? ?? ??? ??? ????">
-
-        <label>?????:</label>
-        <input type="text" placeholder="??? ?? ??? ??? ????">
-
-        <label>????:</label>
-        <input type="text" placeholder="???? ??? ????">
+    <div class="section">
+      <label>?? ???? ??? ?? ???:</label>
+      <span>______</span>
+    </div>
+    <div class="section">
+      <label>?????:</label>
+      <span>______</span>
+    </div>
+    <div class="section">
+      <label>????:</label>
+      <span>______</span>
+    </div>
+    <div class="section">
+      <label>?????:</label>
+      <span>______</span>
+    </div>
+    <div class="section">
+      <label>?? ?? ???:</label>
+      <span>______</span>
+    </div>
+    <div class="section">
+      <label>??? ??? ???:</label>
+      <span>______</span>
+    </div>
+    <div class="section">
+      <label>????? ???:</label>
+      <span>______</span>
     </div>
 
-    <div class="section" style="background-color: #FFF9C4;">
-        <label>?? ?? ???:</label>
-        <input type="text" placeholder="?? ??? ??? ????">
-
-        <label>??? ??? ???:</label>
-        <input type="text" placeholder="??? ??? ??? ??? ????">
-
-        <label>????? ???:</label>
-        <input type="text" placeholder="????? ??? ??? ????">
+    <div class="qr-code">
+      <p>?? ??? ??? ????: <strong>03088137252</strong></p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=03088137252&size=150x150" alt="JazzCash QR Code">
     </div>
 
-    <div class="qr">
-        <h3>??? ??? ????: 03088137252</h3>
-        <img src="https://i.ibb.co/2tZkHP2/jazzcash-qr.png" alt="JazzCash QR Code" width="200">
-    </div>
-<div class="section" style="background-color: #E8F5E9;">
-        <h4>??? ???:</h4>
-        <p>??? ?? ?? ???? ??????? ?? ??? ?????? ??? ???? ??? ???? <strong>03088137252</strong> ?? ???????</p>
+    <div class="footer">
+<p>??? ???: "??? ?? ?? ???? ??????? ?? ??? ?????? ??? ???? ??? <strong>03088137252</strong> ?? ???? ?? ????"</p>
     </div>
 
-    <div style="text-align:center;">
-        <button class="print-btn" onclick="window.print()">??? ???? ????</button>
-        <button class="pdf-btn" onclick="saveAsPDF()">?? PDF ????? ????</button>
+    <div class="buttons">
+      <button onclick="window.print()">??? ???? ????</button>
+      <button onclick="downloadPDF()">?? PDF ????? ????</button>
     </div>
+  </div>
 
-    <footer>
-        © 2025 ???? ??????? ???? ???? ????? ????
-    </footer>
+  <script>
+    // ????? ??? ???? ???? ??????
+    document.getElementById('currentDate').textContent = new Date().toLocaleDateString('ur-PK');
+    document.getElementById('receiptNumber').textContent = 'MN-' + Math.floor(Math.random() * 100000);
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script>
-        // ????? ??? ???? ????
-        const today = new Date();
-        document.getElementById('date').innerText = ?? ?????: ${today.toLocaleDateString('ur-PK')};
-        document.getElementById('receiptNumber').innerText = Math.floor(Math.random() * 90000) + 10000;
-
-        // PDF ????? ???? ?? ?????
-        function saveAsPDF() {
-            var element = document.body;
-            var opt = {
-                margin: 0.5,
-                filename: '????_??????_????.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-html2pdf().set(opt).from(element).save();
-        }
-    </script>
-
+    // PDF ??????? ?????
+    function downloadPDF() {
+      window.print();
+    }
+  </script>
 </body>
 </html>
 ```
